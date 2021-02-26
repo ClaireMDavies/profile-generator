@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Employee = require("./lib/employee.js");
 const Engineer = require("./lib/engineer.js");
 const Intern = require("./lib/intern.js");
 const Manager = require("./lib/manager.js");
@@ -60,7 +59,8 @@ var addEmployee = [
 var employeeArray = []
 // create function initate the input sequence
 function askForInput() {
-    
+    managerQuestions[0].message = "What is the manager's name?";
+
     inquirer.prompt(managerQuestions).then((answers)=> {
 
         var manager = new Manager(answers);
@@ -72,7 +72,7 @@ function askForInput() {
    
 }
 
-//create function to ask for additional employees (need switch statement)
+//create function to ask for additional employees 
 function addMoreEmployees(){
     inquirer.prompt(addEmployee).then((answers) => {
         var nextEmployee = answers.addEmployee;
@@ -84,18 +84,16 @@ function addMoreEmployees(){
                 askInternQuestions();
                 break;
             case "No more employees to add":
-                //generate html
+                employeeArray.forEach(employee => console.log(employee.generateHTML()));  //generate html
                 break;
-        }
-        
+        }  
     })
-    
-
-
 }
 
 //create function to run engineer questions
 function askEngineerQuestions() {
+
+    engineerQuestions[0].message = "What is the engineer's name?";
 
     inquirer.prompt(engineerQuestions).then((answers)=> {
 
@@ -108,7 +106,23 @@ function askEngineerQuestions() {
 }
 
 //create function to run intern questions
+function askInternQuestions() {
+
+    internQuestions[0].message = "What is the intern's name?";
+    
+    inquirer.prompt(internQuestions).then((answers)=> {
+
+        var intern = new Intern(answers);
+        employeeArray.push(intern);
+        console.log(employeeArray);
+
+        addMoreEmployees()
+    })  
+}
 
 //create function to generate html
+function generateHtml() {
+
+}
 
 askForInput()  
