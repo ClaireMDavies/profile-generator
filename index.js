@@ -3,6 +3,7 @@ const fs = require("fs");
 const Employee = require("./lib/employee.js");
 const Engineer = require("./lib/engineer.js");
 const Intern = require("./lib/intern.js");
+const Manager = require("./lib/manager.js");
 
 var employeeQuestions = [
     {
@@ -60,25 +61,36 @@ var employeeArray = []
 // create function initate the input sequence
 function askForInput() {
     
-    if (employeeArray === []) {
-        inquirer.prompt(managerQuestions).then((answers)=> {
+    inquirer.prompt(managerQuestions).then((answers)=> {
 
-            var manager = new Manager(answers);
-            employeeArray.push(manager);
+        var manager = new Manager(answers);
+        employeeArray.push(manager);
+        console.log(employeeArray);
 
-            addEmployees()
-
-
-
-        }
-        
-        )
-    }
+        addMoreEmployees()
+    })  
+   
 }
 
 //create function to ask for additional employees (need switch statement)
-function addEmployees()
-{
+function addMoreEmployees(){
+    inquirer.prompt(addEmployee).then((answers) => {
+        var nextEmployee = answers.addEmployee;
+        switch (nextEmployee) {
+            case "Engineer":
+                engineerQuestions();
+                break;
+            case "Intern":
+                internQuestions();
+                break;
+            case "No more employees to add":
+                //generate html
+                break;
+        }
+        
+    })
+    
+
 
 }
 
@@ -88,4 +100,4 @@ function addEmployees()
 
 //create function to generate html
 
-       
+askForInput()  
