@@ -9,7 +9,7 @@ var employeeQuestions = [
     {
         name: "name",
         type: "input",
-        message: "What is ${getRole()}'s name?"
+        message: "What is their name?"
     },
     {
         name: "id",
@@ -25,7 +25,7 @@ var employeeQuestions = [
 
 
 var managerQuestions = employeeQuestions.slice();
-
+    
     managerQuestions.push({
         name:"officeNumber",
         type:"input",
@@ -78,10 +78,10 @@ function addMoreEmployees(){
         var nextEmployee = answers.addEmployee;
         switch (nextEmployee) {
             case "Engineer":
-                engineerQuestions();
+                askEngineerQuestions();
                 break;
             case "Intern":
-                internQuestions();
+                askInternQuestions();
                 break;
             case "No more employees to add":
                 //generate html
@@ -95,6 +95,17 @@ function addMoreEmployees(){
 }
 
 //create function to run engineer questions
+function askEngineerQuestions() {
+
+    inquirer.prompt(engineerQuestions).then((answers)=> {
+
+        var engineer = new Engineer(answers);
+        employeeArray.push(engineer);
+        console.log(employeeArray);
+
+        addMoreEmployees()
+    })  
+}
 
 //create function to run intern questions
 
