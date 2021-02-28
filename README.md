@@ -18,7 +18,7 @@ Creating an application that would allow a user to input details of a team, such
 Initiate the app by opening the terminal, and running npm install, followed by node index.js
 
 ## Usage
-The following video shows the application in action.
+The following link shows the application in action. [profile-generator-video.webm](https://drive.google.com/file/d/1QFn5_t2cECWaogiHjoz1R4StoFk8sm45/view?usp=sharing)
 
 After going through the installation process, you need to answer the questions posed in the terminal.  Once completed, these will be added into an html template, and written to the output.html in the dist file, where you will be able to see the dynamically created html file.  
 

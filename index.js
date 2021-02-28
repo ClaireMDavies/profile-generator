@@ -71,7 +71,7 @@ function askForInput() {
 
         var manager = new Manager(answers);
         employeeArray.push(manager);
-        console.log(employeeArray);
+        //console.log(employeeArray);
 
         addMoreEmployees()
     })  
@@ -105,7 +105,7 @@ function askEngineerQuestions() {
 
         var engineer = new Engineer(answers);
         employeeArray.push(engineer);
-        console.log(employeeArray);
+        //console.log(employeeArray);
 
         addMoreEmployees()
     })  
@@ -120,7 +120,7 @@ function askInternQuestions() {
 
         var intern = new Intern(answers);
         employeeArray.push(intern);
-        console.log(employeeArray);
+        //console.log(employeeArray);
 
         addMoreEmployees()
     })  
