@@ -1,25 +1,31 @@
 const Employee = require("../lib/employee.js");
 
 describe("Employee", () => {
+
+    const answers = [];
+    answers.name = "Claire Davies";
+    answers.id = "123";
+    answers.email = "claire.davies@junitech.com";
+
+    const employee = new Employee(answers);
+
     it("should instantiate the instance of Employee", () => {
-        const e = new Employee();
-        expect(typeof(e)).toBe("object");
+        expect(typeof(employee)).toBe("object");
+    });
+
+    it("role should be employee", () => {
+        expect(employee.getRole()).toBe("Employee");
     });
 
     it("should get name from answers from inquirer", () => {
-        const name = "Claire";
-        const e = new Employee(name);
-        expect(e.name).toBe(name);
-    });
-    it("should get id from answers from inquirer", () => {
-        const testValue = 80;
-        const e = new Employee("Foo",testValue);
-        expect(e.id).toBe(testValue);
-    });
-    it("should get email from answers from inquirer", () => {
-        const testValue = "test.email@test.co.uk";
-        const e = new Employee("Foo", 1, testValue);
-        expect(e.email).toBe(testValue)
+        expect(employee.getName()).toBe("Claire Davies");
     });
 
-})
+    it("should get id from answers from inquirer", () => {
+        expect(employee.getId()).toBe("123");
+    });
+
+    it("should get email from answers from inquirer", () => {
+        expect(employee.getEmail()).toBe("claire.davies@junitech.com");
+    });
+});
