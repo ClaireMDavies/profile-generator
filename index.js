@@ -34,7 +34,7 @@ var managerQuestions = employeeQuestions.slice();
 var engineerQuestions = employeeQuestions.slice();
 
     engineerQuestions.push({
-        name:"github",
+        name:"githubProfile",
         type:"input",
         message: "What is the engineer's github profile?"
     });
@@ -84,7 +84,8 @@ function addMoreEmployees(){
                 askInternQuestions();
                 break;
             case "No more employees to add":
-                employeeArray.forEach(employee => console.log(employee.generateHTML()));  //generate html
+               teamHTML(employeeArray);
+          //  employeeArray.forEach(employee => console.log(employee.generateHTML()));  //generate html
                 break;
         }  
     })
@@ -121,8 +122,26 @@ function askInternQuestions() {
 }
 
 //create function to generate html
-function generateHtml() {
+function teamHTML(employeeArray) {
 
+    var html = "";
+
+    for (var i=0; i < employeeArray.length; i++) {
+        
+        html += employeeArray[i].generateHtml();
+    }
+    
+    try {
+        var employeeTemplate = fs.readFileSync(`./src/index.html`, 'utf8');
+        employeeTemplate = employeeTemplate.replace("[placeholder]", html);
+        fs.writeFileSync('./dist/output.html', employeeTemplate);
+        fs.copyFileSync('./src/style.css', './dist/style.css');
+    }
+    catch (err) {
+        console.error(err);
+    }
+
+      // use html
 }
 
-askForInput()  
+askForInput();
