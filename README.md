@@ -24,6 +24,9 @@ After going through the installation process, you need to answer the questions p
 
 By running npm run test, you can check the functionality of the code provided. 
 
+A screenshot of the rendered html page is shown below.
+![profile-generator.png](assets/profile-generator.png)
+
 ## License
 License with MIT
 

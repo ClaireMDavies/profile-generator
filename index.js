@@ -3,7 +3,9 @@ const fs = require("fs");
 const Engineer = require("./lib/engineer.js");
 const Intern = require("./lib/intern.js");
 const Manager = require("./lib/manager.js");
+const distributionDirectory = './dist/';
 
+//base question array, applicable to all classes
 var employeeQuestions = [
     {
         name: "name",
@@ -22,7 +24,7 @@ var employeeQuestions = [
     }];
     
 
-
+// adding the special manager question
 var managerQuestions = employeeQuestions.slice();
     
     managerQuestions.push({
@@ -31,6 +33,7 @@ var managerQuestions = employeeQuestions.slice();
         message: "What is the manager's office number?"
     });
 
+// adding special engineer question    
 var engineerQuestions = employeeQuestions.slice();
 
     engineerQuestions.push({
@@ -39,6 +42,7 @@ var engineerQuestions = employeeQuestions.slice();
         message: "What is the engineer's github profile?"
     });
 
+//adding special intern question
 var internQuestions = employeeQuestions.slice();
 
     internQuestions.push({
@@ -47,6 +51,7 @@ var internQuestions = employeeQuestions.slice();
         message: "What is the intern's school?"
     });
 
+// question allowing user to choose what to do next
 var addEmployee = [
     {
     name:"addEmployee",
@@ -57,7 +62,8 @@ var addEmployee = [
 ]
 
 var employeeArray = []
-// create function initate the input sequence
+
+// create function to initate the input sequence
 function askForInput() {
     managerQuestions[0].message = "What is the manager's name?";
 
@@ -85,7 +91,6 @@ function addMoreEmployees(){
                 break;
             case "No more employees to add":
                teamHTML(employeeArray);
-          //  employeeArray.forEach(employee => console.log(employee.generateHTML()));  //generate html
                 break;
         }  
     })
@@ -121,6 +126,7 @@ function askInternQuestions() {
     })  
 }
 
+
 //create function to generate html
 function teamHTML(employeeArray) {
 
@@ -132,6 +138,9 @@ function teamHTML(employeeArray) {
     }
     
     try {
+        if (!fs.existsSync(distributionDirectory)) {
+            fs.mkdirSync(distributionDirectory);
+        }
         var employeeTemplate = fs.readFileSync(`./src/index.html`, 'utf8');
         employeeTemplate = employeeTemplate.replace("[placeholder]", html);
         fs.writeFileSync('./dist/output.html', employeeTemplate);
@@ -141,7 +150,7 @@ function teamHTML(employeeArray) {
         console.error(err);
     }
 
-      // use html
+      
 }
 
 askForInput();
